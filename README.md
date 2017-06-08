@@ -24,6 +24,8 @@ npm install pxl-dynamodb --save
 
 Everything described in the [README of the `pxl` library](https://github.com/analog-nico/pxl#readme) is relevant for `pxl-dynamodb` as well. The only difference is that this library includes a persistence layer for DynamoDB and needs to be initialized differently.
 
+NOTE: The Pxls and Links tables must be created on the DB beforehand.
+
 ``` js
 let PxlDynamodb = require('pxl-dynamodb')
 
@@ -32,8 +34,8 @@ let pxl = new PxlDynamodb({
     // Options described for the pxl lib like queryParam and logPxlFailed can be passed here as well
     
     // Additional options are:
-    collectionPxls: 'pxls', // Name of the collection to store pxl documents for access tracking
-    collectionLinks: 'links', // Name of the collection to store shortened links
+    collectionPxls: 'pxls', // Name of the DynamoDB table to store pxl documents for access tracking
+    collectionLinks: 'links', // Name of the DynamoDB table to store shortened links
     
     alwaysShortenWithNewLinkId: false // Set to true if you need a different linkId each time you shorten a link - even if the link was shortened before
     
@@ -45,7 +47,12 @@ let pxl = new PxlDynamodb({
 Before you use any functions like `pxl.createdPxl(...)` you need to connect to the database:
 
 ``` js
-pxl.connect('dynamodb://localhost:27017/test', {}) // Passed values are the defaults
+pxl.connect({
+        region: 'localhost',
+        endpoint: 'http://localhost:8000',
+        accessKeyId: 'MOCK_ACCESS_KEY_ID',
+        secretAccessKey: 'MOCK_SECRET_ACCESS_KEY'
+    }) // Passed values are the defaults
     .then((collections) => {
         
         // Returns the collections to allow creating additional indexes etc.
