@@ -7,8 +7,8 @@ describe('To initialize, PxlDynamodb', () => {
     it('should not accept multiple connect(...) calls', () => {
 
         let pxl = new PxlDynamodb({
-            collectionPxls: 'pxl-dynamodb-text-pxls',
-            collectionLinks: 'pxl-dynamodb-text-links'
+            collectionPxls: 'pxls',
+            collectionLinks: 'links'
         })
 
         return pxl.connect()
@@ -45,8 +45,8 @@ describe('To initialize, PxlDynamodb', () => {
     it('should not accept createPxl(...) calls before connect(...)', () => {
 
         let pxl = new PxlDynamodb({
-            collectionPxls: 'pxl-dynamodb-text-pxls',
-            collectionLinks: 'pxl-dynamodb-text-links'
+            collectionPxls: 'pxls',
+            collectionLinks: 'links'
         })
 
         return pxl.createPxl()
@@ -65,8 +65,8 @@ describe('To initialize, PxlDynamodb', () => {
     it('should not accept logPxl(...) calls before connect(...)', () => {
 
         let pxl = new PxlDynamodb({
-            collectionPxls: 'pxl-dynamodb-text-pxls',
-            collectionLinks: 'pxl-dynamodb-text-links'
+            collectionPxls: 'pxls',
+            collectionLinks: 'links'
         })
 
         return pxl.logPxl('abcdefgh')
@@ -85,8 +85,8 @@ describe('To initialize, PxlDynamodb', () => {
     it('should not accept shorten(...) calls before connect(...)', () => {
 
         let pxl = new PxlDynamodb({
-            collectionPxls: 'pxl-dynamodb-text-pxls',
-            collectionLinks: 'pxl-dynamodb-text-links'
+            collectionPxls: 'pxls',
+            collectionLinks: 'links'
         })
 
         return pxl.shorten('some link')
@@ -105,8 +105,8 @@ describe('To initialize, PxlDynamodb', () => {
     it('should not accept unshorten(...) calls before connect(...)', () => {
 
         let pxl = new PxlDynamodb({
-            collectionPxls: 'pxl-dynamodb-text-pxls',
-            collectionLinks: 'pxl-dynamodb-text-links'
+            collectionPxls: 'pxls',
+            collectionLinks: 'links'
         })
 
         return pxl.unshorten('abcdefgh')
@@ -125,8 +125,8 @@ describe('To initialize, PxlDynamodb', () => {
     it('should not accept disconnect() calls before connect(...)', () => {
 
         let pxl = new PxlDynamodb({
-            collectionPxls: 'pxl-dynamodb-text-pxls',
-            collectionLinks: 'pxl-dynamodb-text-links'
+            collectionPxls: 'pxls',
+            collectionLinks: 'links'
         })
 
         return pxl.disconnect()
@@ -137,25 +137,6 @@ describe('To initialize, PxlDynamodb', () => {
                 (err) => {
                     // Error expected
                     expect(err.message).to.eql('Database connection is not established. Please call PxlDynamodb.connect(...) first.')
-                }
-            )
-
-    })
-
-    it('should reject connect(...) if db connection cannot be established', () => {
-
-        let pxl = new PxlDynamodb({
-            collectionPxls: 'pxl-dynamodb-text-pxls',
-            collectionLinks: 'pxl-dynamodb-text-links'
-        })
-
-        return pxl.connect('dynamodb:invalid')
-            .then(
-                () => {
-                    throw new Error('Expected an error')
-                },
-                () => {
-                    // Error expected
                 }
             )
 

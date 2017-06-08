@@ -10,8 +10,8 @@ describe('PxlDynamodb', () => {
     before(() => {
 
         pxl = new PxlDynamodb({
-            collectionPxls: 'pxl-dynamodb-text-pxls',
-            collectionLinks: 'pxl-dynamodb-text-links',
+            collectionPxls: 'pxls',
+            collectionLinks: 'links',
             alwaysShortenWithNewLinkId: true
         })
 
@@ -23,17 +23,9 @@ describe('PxlDynamodb', () => {
 
     })
 
-    it('should return the collection from connect(...)', () => {
+    it('should succeed from connect(...)', () => {
 
         return pxl.connect()
-            .then((collections) => {
-
-                return collections.pxls.stats()
-                    .then(() => {
-                        return collections.links.stats()
-                    })
-
-            })
 
     })
 
@@ -141,9 +133,9 @@ describe('PxlDynamodb', () => {
         let origDb = pxl.persistenceLayer.db
 
         pxl.persistenceLayer.db = {
-            collection() {
+            put() {
                 return {
-                    insertOne() {
+                    promise() {
                         return new Promise((resolve, reject) => {
                             throw new Error('Some unexpected error')
                         })
@@ -259,9 +251,9 @@ describe('PxlDynamodb', () => {
         let origDb = pxl.persistenceLayer.db
 
         pxl.persistenceLayer.db = {
-            collection() {
+            put() {
                 return {
-                    insertOne() {
+                    promise() {
                         return new Promise((resolve, reject) => {
                             throw new Error('Some unexpected error')
                         })
