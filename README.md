@@ -53,14 +53,6 @@ pxl.connect({
         accessKeyId: 'MOCK_ACCESS_KEY_ID',
         secretAccessKey: 'MOCK_SECRET_ACCESS_KEY'
     }) // Passed values are the defaults
-    .then((collections) => {
-        
-        // Returns the collections to allow creating additional indexes etc.
-        
-        collections.pxls.stats().then(console.dir)
-        collections.lists.stats().then(console.dir)
-        
-    })
 ```
 
 - First parameter `uri`: The DynamoDB connection string that is used to connect to the database using the [`dynamodb` library](https://www.npmjs.com/package/dynamodb)
