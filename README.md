@@ -84,6 +84,8 @@ If you want to debug a test you should use `gulp test-without-coverage` to run a
 
 ## Change History
 
+- v0.0.6 (2017-07-23)
+    - Log createdAt and updatedAt
 - v0.0.5 (2017-06-07)
     - Readme updated
 - v0.0.4 (2017-06-07)
